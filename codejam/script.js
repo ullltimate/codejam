@@ -32,6 +32,14 @@ function move(index){
     emptyCell.top = cell.top;
     cell.left = emptyLeft;
     cell.top = emptyTop;
+
+    clicks += 1;
+    document.querySelector(".clicks").innerHTML = clicks;
+
+    if (btnSoundOn.style.display === 'block'){
+        audioPlay();
+    }
+    
 }
 
 const getNotRepeatRandomNumber = (min, max) => {
@@ -74,20 +82,46 @@ for (var i=1; i<=15; i++){
     cell.style.left = `${left * cellSize}px`;
     
     blockFieldGame.append(cell);
-
 }
+
 var moves = document.createElement('p');
 moves.className = 'movesWrap'
 blockFieldGame.before(moves);
 moves.innerHTML = 'Moves: <a class = "clicks">0</a>'
 var clicks = 0;
+
 blockFieldGame.addEventListener('click', (e) => {
     e = e.target.id;
     move(e);
-    clicks += 1;
-    document.querySelector(".clicks").innerHTML = clicks;
 });
 
+function audioPlay(){
+    var audio = new Audio('./audio/gem-puzzle-move.mp3')
+    audio.play();
+}
+
+var sound = document.createElement('p');
+sound.innerHTML = 'Sound: <button type = "button" class = "buttonSound"><span class = "buttonSoundOff">Off</span><span class = "buttonSoundOn">On</span></button>';
+sound.className = 'soundName';
+blockFieldGame.before(sound);
+var btnSoundOff = document.querySelector('.buttonSoundOff');
+var btnSoundOn = document.querySelector('.buttonSoundOn');
+var btnSound = document.querySelector('.buttonSound');
+btnSoundOff.style.display = 'block';
+btnSoundOn.style.display = 'none';
+
+function soundPlay(){
+    if (btnSoundOff.style.display === 'block'){
+        btnSoundOff.style.display = 'none';
+        btnSoundOn.style.display = 'block';
+    } else {
+        btnSoundOff.style.display = 'block';
+        btnSoundOn.style.display = 'none';
+    }
+}
+btnSound.addEventListener('click', () => {
+    soundPlay();
+})
 
 
 
