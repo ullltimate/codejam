@@ -37,7 +37,7 @@ function move(index){
     document.querySelector(".clicks").innerHTML = clicks;
 
     
-    if(s === '00' & m === '00'){
+    if(s === '00' && m === '00'){
         timerBegin();
     }
 
