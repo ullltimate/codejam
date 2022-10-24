@@ -36,6 +36,11 @@ function move(index){
     clicks += 1;
     document.querySelector(".clicks").innerHTML = clicks;
 
+    
+    if(s === '00' & m === '00'){
+        timerBegin();
+    }
+
     if (btnSoundOn.style.display === 'block'){
         audioPlay();
     }
@@ -123,5 +128,32 @@ btnSound.addEventListener('click', () => {
     soundPlay();
 })
 
+var timer = document.createElement('p');
+timer.innerHTML = 'Timer: <span class = "min"></span>:<span class = "sec"></span>';
+timer.className = 'timer';
+sound.before(timer);
+var min = document.querySelector('.min');
+var sec = document.querySelector('.sec');
+var s = '00', m = '00';
+min.innerHTML = m;
+sec.innerHTML = s;
+
+function timerBegin(){
+    setInterval(function(){
+        s = +s +1;
+        if( s < 10 ) { 
+            s = '0' + s; 
+        }
+        if( s == 60 ) {
+            s = '00';
+            m = +m + 1;
+            if( m < 10 ) { 
+                m = '0' + m; 
+            }
+        }
+        sec.innerHTML = s;
+        min.innerHTML = m;
+    },1000);
+ }
 
 
