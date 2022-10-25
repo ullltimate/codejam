@@ -156,4 +156,11 @@ function timerBegin(){
     },1000);
  }
 
+var newGame = document.createElement('button');
+newGame.innerHTML = 'New Game';
+newGame.className = 'btnNewGame';
+blockFieldGame.before(newGame);
 
+newGame.addEventListener('click', () => {
+    document.location.reload();
+})
